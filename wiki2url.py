@@ -3,6 +3,8 @@ import lxml.html
 
 import os
 import argparse
+import hashlib
+from time import time
 
 url_li = set()
 
@@ -17,7 +19,6 @@ def get_url(url, count):
     except:
         return
 
-    root = lxml.html.fromstring(req.content)
     for a in root.cssselect('a'):
         new_url = a.get('href')
         title = a.get('title')
@@ -26,9 +27,10 @@ def get_url(url, count):
             url_li.add(new_url)
             get_url(new_url, count - 1)
 
-def save_url():
+def save_url(url, depth):
 
-    url_path = 'url.lst'
+    name = hashlib.sha1(url.encode('utf-8')).hexdigest()[:15]
+    url_path = name + '_' + depth + '.lst'
 
     if not os.path.isfile(url_path):
         open(url_path, 'w')
@@ -39,9 +41,9 @@ def save_url():
         origin_url.update(url_li) # 기존 크롤링 url과 새로운 url 병합
 
     with open(url_path, "w") as f:
-        f.write(origin_url.join('\n'))
+        f.write(('\n').join(origin_url))
 
-    print('Save {} url!'.format(len(url_li)))
+    print('Save merged url data. Total {}, new {}'.format(len(origin_url), len(url_li)))
 
 if __name__=='__main__':
     parser = argparse.ArgumentParser()
@@ -49,5 +51,11 @@ if __name__=='__main__':
     parser.add_argument("-d","--depth", default = 2)
     args = parser.parse_args()
 
-    get_url(args.origin_url, args.depth)
-    save_url()
+    start_time = time()
+
+    get_url(args.origin_url, int(args.depth))
+    url_li.add(args.origin_url)
+    save_url(args.origin_url, args.depth)
+
+    end_time = time()
+    print('Time : {}'.format((end_time-start_time)//60)) # 총 시간
