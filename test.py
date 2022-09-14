@@ -5,6 +5,7 @@ import os
 import argparse 
 import atexit # keyboardinterrupt(Ctrl+C) 시 실행
 from time import time
+import signal 
 
 bfs_li = list()
 content = dict()
@@ -72,6 +73,8 @@ def load():
 def handler(signum, frame):
     print('   Add url to content.txt.... (url_number : {})'.format(url_i))
     save()
+
+signal.signal(signal.SIGINT, handler)
 
 if __name__=='__main__':
     start_time = time()
