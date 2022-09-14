@@ -66,7 +66,12 @@ def load():
         origin_li = list()
         return origin_li
 
-atexit.register(save)
+# atexit.register(save) # Ctri+C 안먹히는 현상 발생
+
+# 중간중간 저장하기 위한 장치 ('Ctrl+C')
+def handler(signum, frame):
+    print('   Add url to content.txt.... (url_number : {})'.format(url_i))
+    save()
 
 if __name__=='__main__':
     start_time = time()

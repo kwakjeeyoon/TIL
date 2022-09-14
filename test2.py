@@ -86,7 +86,7 @@ def checklist(url_idx=None, check=False):
 def handler(signum, frame):
     print('   Saveing anno.json .... (url_number : {})'.format(url_i))
     checklist(url_idx=url_i)
-    sys.exit(0)
+    # sys.exit(0)
 
 signal.signal(signal.SIGINT, handler)
 
