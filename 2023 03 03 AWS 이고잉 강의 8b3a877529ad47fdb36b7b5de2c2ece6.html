@@ -1,0 +1,680 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>2023.03.03 AWS 이고잉 강의</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8b3a8775-29ad-47fd-b36b-7b5de2c2ece6" class="page sans"><header><h1 class="page-title">2023.03.03 AWS 이고잉 강의</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M8 15.126C11.8623 15.126 15.0615 11.9336 15.0615 8.06445C15.0615 4.20215 11.8623 1.00293 7.99316 1.00293C4.13086 1.00293 0.938477 4.20215 0.938477 8.06445C0.938477 11.9336 4.1377 15.126 8 15.126ZM8 13.7383C4.85547 13.7383 2.33301 11.209 2.33301 8.06445C2.33301 4.91992 4.84863 2.39746 7.99316 2.39746C11.1377 2.39746 13.6738 4.91992 13.6738 8.06445C13.6738 11.209 11.1445 13.7383 8 13.7383ZM4.54102 8.91211H7.99316C8.30078 8.91211 8.54004 8.67285 8.54004 8.37207V3.8877C8.54004 3.58691 8.30078 3.34766 7.99316 3.34766C7.69238 3.34766 7.45312 3.58691 7.45312 3.8877V7.83203H4.54102C4.2334 7.83203 4.00098 8.06445 4.00098 8.37207C4.00098 8.67285 4.2334 8.91211 4.54102 8.91211Z"></path></svg></span>Created</th><td><time>@March 3, 2023 8:01 AM</time></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>강연자</th><td><span class="selected-value select-value-color-gray">이고잉</span></td></tr></tbody></table></header><div class="page-body"><h2 id="7cc769c0-c932-425a-ba81-c4e78ad0da05" class=""><details open=""><summary>👩‍💻Github <strong>복습 시나리오</strong></summary></details></h2><div class="indented"><ol type="1" id="2e5055b9-3e1f-426a-bfd9-229b0ac7a448" class="numbered-list" start="1"><li>원격 저장소를 만듭니다. (github.com)</li></ol><ol type="1" id="aed04d41-c8f1-4cfb-8b2b-c930fcb54a61" class="numbered-list" start="2"><li>지역 저장소로 복제합니다. (git clone REPO_URL .)</li></ol><ol type="1" id="5d50631a-749c-48d7-b7fe-49bbe7a826ce" class="numbered-list" start="3"><li>파일 3개를 만들고 커밋하세요.<ol type="a" id="310b7e44-a1f1-4671-bda4-be505ce50622" class="numbered-list" start="1"><li>work1.txt : 1</li></ol><ol type="a" id="bf8b3635-e425-407f-92f7-bf1087483145" class="numbered-list" start="2"><li>work2.txt : 2</li></ol><ol type="a" id="3e615727-c6be-4f93-a5f4-ddc30698264b" class="numbered-list" start="3"><li>work3.txt : 2</li></ol></li></ol><ol type="1" id="4e20007e-5002-4c3a-81ea-d112190d7f36" class="numbered-list" start="4"><li>시간여행을 합니다. (git checkout COMMIT_ID)</li></ol><ol type="1" id="3dad7cf9-6fe8-42e0-a7c6-a32ccd946467" class="numbered-list" start="5"><li>최신으로 복귀합니다. (git checkout BRANCH_NAME)</li></ol><ol type="1" id="e84d4d8f-825f-4213-bdb5-62ecfc8329bb" class="numbered-list" start="6"><li>버전을 취소합니다. (git reset --hard COMMIT_ID)</li></ol><ol type="1" id="ea7e4b46-b342-43f2-bf37-de44cf35f54e" class="numbered-list" start="7"><li>원격 저장소로 push 합니다. (git push)</li></ol><ol type="1" id="4a7948f3-949f-46cf-97c9-eeefbe12bc96" class="numbered-list" start="8"><li>새로운 지역 저장소로 clone 합니다.</li></ol><ol type="1" id="68f6fb4e-2171-4eb8-8f0e-00f8d6bb86ca" class="numbered-list" start="9"><li>충돌 시나리오에 따라서 충돌을 일으키고 해결합니다.<ol type="a" id="49ba611c-0e02-4c1d-9192-e164d0376599" class="numbered-list" start="1"><li>1234</li></ol></li></ol><ol type="1" id="bb2e2f44-c946-4ae1-a3c7-4f5997abbc2d" class="numbered-list" start="10"><li>동기화를 합니다.</li></ol></div><nav id="6b5f1cb5-f628-498b-8774-2ed5f839d01d" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7cc769c0-c932-425a-ba81-c4e78ad0da05">👩‍💻Github <strong>복습 시나리오</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#37cd5c58-ff29-4739-8738-306bf29bbe9b"><mark class="highlight-blue">🌐Web</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#862de3dc-653c-4ddc-8131-bfbfad26df3e">⭐웹 페이지 만들기</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5418b988-11d5-449d-ad76-a8f50812a053">⭐웹 꾸미기 - html 태그</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ebfd5855-6878-4562-98e1-0846d085058a">⭐이미지 넣기</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#111d193a-05f2-4b45-a8db-b96466d94ae7"><mark class="highlight-blue">☁️AWS</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#652e3d16-d98e-4599-b730-c617fb9552fc">클라우드 컴퓨팅</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#47c77881-a5a8-4ec7-80c3-08c5a6ab67c5">💭AWS S3</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#3928ef48-9c43-4e03-bf3d-3fbbb3403b6e">1. 버킷 생성하기 🪣</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#774fbb2f-213a-460c-a09a-38043a91fa04">2. 파일 업로드 📁</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#feb064f6-22ef-4f41-b0c6-828c25f642d9">3. S3 웹서버 기능 추가 🌐</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#f1a6648e-d072-4bb8-ae01-68b5bcfdac0c">4. 요금 💸</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c39d03c9-318f-4381-9532-92c5c9c4b16a">💭AWS EC2</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#75b65a7c-0d85-4c1f-9092-c8fc378fb91e">1. 보안 그룹 설정 🔐</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#ded3f491-141d-4792-86cc-27528e75ef91">2. 인스턴스 생성 👶</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#11713136-7eec-4e86-bf8a-8cea750a4ab0">3. 인스턴스 연결 📶</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#4991fd13-b480-480c-a259-b781ca08919d">4. VS Code로 연결 🖥️</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#df1fedc6-81a0-4b3c-aff7-cb27637c147b">5. CLI 환경에서 Apache 웹서버 설치 ⌨️</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#aba99df3-6fad-4976-adcf-3945b6f10171">💭AWS CloudFront</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#6d539b09-e18b-4472-aae5-fbd71eafc9a7">1. CloudFront 배포 🌎</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#b070754c-32da-4ec8-838e-9669317957af">2. 배포 도메인으로 접속 📶</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4e965c16-73c4-4a2c-80a7-44b19de88d4e">💭AWS RDS</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#5689e716-170b-4928-959c-f5f82cdb720f">1. 데이터베이스 생성 👶</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#3f285efa-664d-4860-8955-ac256d6403eb">2. MySQL Client ↔ Server</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#c3ff34cc-7afe-47a1-b334-a4310065e895">3. 데이터 채우기 💽</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#448c8781-88f4-4271-b8b2-34d67fefebac">4. PHP 맛보기 😋</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#3da9c3c1-be0c-464d-8e51-a0b94fd72898">5. PHP로 데이터베이스에서 데이터 가져오기</a></div></nav><h1 id="37cd5c58-ff29-4739-8738-306bf29bbe9b" class="block-color-teal"><mark class="highlight-blue">🌐Web</mark></h1><hr id="33614adf-3236-4e2c-85fa-3d56b6f3c2b2"/><h3 id="862de3dc-653c-4ddc-8131-bfbfad26df3e" class="">⭐웹 페이지 만들기</h3><ol type="1" id="1acab037-24a2-48f6-8087-747538eb5844" class="numbered-list" start="1"><li>vs code에서 <code>index.html</code> 만들고 ‘WWW is World Wide WEB.’ 내용 넣기</li></ol><ol type="1" id="96bc427d-7a80-479a-a191-b17a7d1e97b4" class="numbered-list" start="2"><li><code>command + o</code> → 크롬 파일탐색기</li></ol><ol type="1" id="039928de-53db-4879-afa4-2aa68e60a9f5" class="numbered-list" start="3"><li>크롬에서 웹페이지가 열림</li></ol><h3 id="5418b988-11d5-449d-ad76-a8f50812a053" class="">⭐웹 꾸미기 - html 태그</h3><ul id="aae64401-e0d6-4a4b-a6f7-b387cf1511df" class="bulleted-list"><li style="list-style-type:disc">강조 - strong<p id="91819cf5-45fb-4fc6-ae90-a263c64db7d8" class=""><code>WWW is </code><mark class="highlight-blue"><code>&lt;strong&gt;</code></mark><code>World Wide WEB.</code><mark class="highlight-blue"><code>&lt;/strong&gt;</code></mark></p></li></ul><ul id="a51e8ccb-c296-4350-ade4-3118f83c5006" class="bulleted-list"><li style="list-style-type:disc">밑줄 - u<p id="c885969f-b517-451f-b9e5-5b8b3657819b" class=""><code>WWW is &lt;strong&gt;World Wide </code><mark class="highlight-blue"><code>&lt;u&gt;</code></mark><code>WEB</code><mark class="highlight-blue"><code>&lt;/u&gt;</code></mark><code>.&lt;/strong&gt;</code></p></li></ul><ul id="3cf40941-6b3b-4334-ad42-2467c5bdbadb" class="bulleted-list"><li style="list-style-type:disc">링크 (하이퍼텍스트) - a href<p id="94d9e060-ce97-4dae-bc21-5e5cccd14500" class=""><mark class="highlight-blue"><code>&lt;a href=”웹주소”&gt;</code></mark><code>WWW is &lt;strong&gt;World Wide &lt;u&gt;WEB&lt;/u&gt;.&lt;/strong&gt;</code><mark class="highlight-blue"><code>&lt;/a&gt;</code></mark></p></li></ul><ul id="69892e04-cfa9-44fa-9ef9-605cf9eecf4b" class="bulleted-list"><li style="list-style-type:disc">리스트 - ol, li<pre id="be890209-9e1f-49f9-878b-78373728aa4f" class="code"><code>&lt;ol&gt;
+    &lt;li&gt;s3&lt;/li&gt;
+    &lt;li&gt;ec2&lt;/li&gt;
+    &lt;li&gt;rds&lt;/li&gt;
+&lt;/ol&gt;</code></pre></li></ul><h3 id="ebfd5855-6878-4562-98e1-0846d085058a" class="">⭐이미지 넣기</h3><figure id="2d852f46-8981-4b94-90f2-e82103be7f67"><a href="https://unsplash.com/ko" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">아름다운 무료 이미지 및 사진 | Unsplash</div><div class="bookmark-description">어떤 프로젝트를 위해서든 다운로드 및 사용할 수 있는 아름다운 무료 이미지 및 사진입니다. 어떤 로열티 프리 또는 스톡 사진보다 좋습니다.</div></div><div class="bookmark-href"><img src="https://unsplash.com/apple-touch-icon.png" class="icon bookmark-icon"/>https://unsplash.com/ko</div></div><img src="https://images.unsplash.com/opengraph/1x1.png?auto=format&amp;fit=crop&amp;w=1200&amp;h=630&amp;q=60&amp;mark-w=64&amp;mark-align=top%2Cleft&amp;mark-pad=50&amp;blend-w=1&amp;mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&amp;blend=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1675750318176-98573021fc30%3Fcrop%3Dfaces%252Cedges%26cs%3Dtinysrgb%26fit%3Dcrop%26fm%3Djpg%26ixid%3DMnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjc3MjkwMTYx%26ixlib%3Drb-4.0.3%26q%3D60%26w%3D1200%26auto%3Dformat%26h%3D630%26mark-w%3D424%26mark-align%3Dmiddle%252Ccenter%26blend-mode%3Dnormal%26blend-alpha%3D10%26mark%3Dhttps%253A%252F%252Fimages.unsplash.com%252Fopengraph%252Fwordmark.png%26blend%3D000000" class="bookmark-image"/></a></figure><ul id="4b8f585f-8da6-460c-b32b-e48501051029" class="bulleted-list"><li style="list-style-type:disc">alt : 이미지가 깨지는 경우 텍스트로 대신 표현 (시각장애인에게 유용한 정보)<p id="54b4ce9b-5f05-4ca5-ad56-01a968008ce2" class=""><code>&lt;img src=”이미지 주소 복사” </code><mark class="highlight-teal"><code>alt=”dog”</code></mark><code>&gt;</code></p></li></ul><ul id="4ec7b3e3-cab8-4df9-b627-bccb6aac59be" class="bulleted-list"><li style="list-style-type:disc">사이즈 조절 - 한 면만 지정하면 비율대로 줄어듦<p id="e629a088-1416-4a1d-a232-fc55cd0a2d58" class=""><code>&lt;img src=”이미지 주소 복사” alt=”dog” </code><mark class="highlight-teal"><code>style=&quot;height:400px&quot;</code></mark><code>&gt;</code></p></li></ul><h1 id="111d193a-05f2-4b45-a8db-b96466d94ae7" class=""><mark class="highlight-blue">☁️AWS</mark></h1><hr id="1b5d9f10-f54f-4880-bb17-9a8a619ffbf9"/><h3 id="652e3d16-d98e-4599-b730-c617fb9552fc" class="">클라우드 컴퓨팅</h3><figure id="b0645876-a791-4c0e-9b85-5c9a2ed3f132" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%258C%25E1%2585%25A5%25E1%2586%25AB_10.41.33.png"><img style="width:1186px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%258C%25E1%2585%25A5%25E1%2586%25AB_10.41.33.png"/></a></figure><ul id="414c88dd-1d87-43c1-86c5-de9d715e5124" class="block-color-red_background bulleted-list"><li style="list-style-type:disc"><strong>On Premises</strong></li></ul><ul id="954d7a1b-7108-450d-b2db-4a475ee65929" class="block-color-red_background bulleted-list"><li style="list-style-type:disc"><strong>IaaS</strong> (infrastructure) - (EC2, Azure, google compute engine)</li></ul><ul id="47860f7d-c7a2-454e-a828-37620c6e069c" class="block-color-red_background bulleted-list"><li style="list-style-type:disc"><strong>PaaS</strong> (Platform) - data, application은 내꺼 (ex. google app engine) ⇒ software developers</li></ul><ul id="97e0030f-b4ae-4f04-8ff1-2cc109ae1a25" class="block-color-red_background bulleted-list"><li style="list-style-type:disc"><strong>SaaS</strong> (Software) - 완성된 소프트웨어를 제공 (ex. gmail, office 364, google docs) ⇒ end users</li></ul><h2 id="47c77881-a5a8-4ec7-80c3-08c5a6ab67c5" class="block-color-blue_background">💭AWS S3</h2><p id="c5e9e0d0-a024-4238-96d7-33c212904b1d" class="">: <strong>AWS 파일서버</strong> - 클라우드 (simple storage service)</p><h3 id="3928ef48-9c43-4e03-bf3d-3fbbb3403b6e" class=""><details open=""><summary>1. 버킷 생성하기 🪣</summary></details></h3><div class="indented"><figure id="0f0faa19-cebd-42d7-a28e-a5ab25fc1ee3" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_1.09.48.png"><img style="width:3360px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_1.09.48.png"/></a></figure><figure id="bf827f4c-7d3a-4f4c-bd1a-9f1a2181ed96" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/SKT_-9.jpg"><img style="width:593px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/SKT_-9.jpg"/></a></figure><figure id="d5e59850-48a6-4013-b651-f5aa17b259f0" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_1.23.48.png"><img style="width:3360px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_1.23.48.png"/></a></figure></div><h3 id="774fbb2f-213a-460c-a09a-38043a91fa04" class=""><details open=""><summary>2. 파일 업로드 📁</summary></details></h3><div class="indented"><figure id="ecf7505e-a5a4-47cb-b587-acc350dcbc3f" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_1.22.52.png"><img style="width:3360px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_1.22.52.png"/></a></figure><figure id="a383551b-1c11-4043-85eb-070b55542733" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/screencapture-s3-console-aws-amazon-s3-upload-user16-2023-03-03-13_24_22.png"><img style="width:1680px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/screencapture-s3-console-aws-amazon-s3-upload-user16-2023-03-03-13_24_22.png"/></a></figure><figure id="52c4ce4e-0d7a-40ce-8d20-a376fdd5f1ac" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_1.27.35.png"><img style="width:3360px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_1.27.35.png"/></a></figure><p id="aead1c3a-3dad-47d0-8143-bed8c94dd51d" class=""><mark class="highlight-yellow_background">⇒ 파일 들어가면 Acess denied 뜰거임</mark></p><p id="8c34fb8e-130c-4121-a7d4-2a5deb3bbfcf" class=""><mark class="highlight-yellow_background">‘ACL을 사용하여 퍼블릭으로 설정’ 해야 다른 사람한테도 웹페이지가 보임</mark></p><figure id="1db9f0ff-91cf-4807-ad7c-c8566d4b0dcc" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/SKT_-10.jpg"><img style="width:1345px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/SKT_-10.jpg"/></a></figure></div><h3 id="feb064f6-22ef-4f41-b0c6-828c25f642d9" class=""><details open=""><summary>3. S3 웹서버 기능 추가 🌐</summary></details></h3><div class="indented"><p id="9d08c1e5-c23e-455c-a3ad-fff895ba881d" class=""><a href="https://user16.s3.ap-northeast-2.amazonaws.com/index.html">https://user16.s3.ap-northeast-2.amazonaws.com/index.html</a></p><p id="8cc88b98-a9b4-42de-ab53-2b6fc5ac918d" class="">→ 여기서 index.html 은 파일명이고 대부분 index.html은 안써줘도 접속이 되는 홈페이지 기능이다. </p><figure id="4bbdf3d0-33af-47c8-9c7f-b19362fbede1" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_1.38.10.png"><img style="width:3360px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_1.38.10.png"/></a></figure><figure id="a609a951-e72f-4d38-9db7-efaee5f122bb" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_1.39.56.png"><img style="width:928px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_1.39.56.png"/></a></figure><p id="455939d2-ea67-479b-866e-0c0aad02a89d" class="">
+</p></div><h3 id="f1a6648e-d072-4bb8-ae01-68b5bcfdac0c" class=""><details open=""><summary>4. 요금 💸</summary></details></h3><div class="indented"><figure id="d9b04600-8abe-4092-988a-84e5bdb6e14b"><a href="https://calculator.aws/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">AWS Pricing Calculator</div><div class="bookmark-description">AWS Pricing Calculator lets you explore AWS services, and create an estimate for the cost of your use cases on AWS.</div></div><div class="bookmark-href"><img src="https://calculator.aws/apple-touch-icon-152x152.png" class="icon bookmark-icon"/>https://calculator.aws/</div></div></a></figure></div><h2 id="c39d03c9-318f-4381-9532-92c5c9c4b16a" class="block-color-blue_background">💭AWS EC2</h2><p id="245b9a1b-f2e8-47c3-adac-1afd250ab422" class="">: 컴퓨터를 임대 (IaaS)</p><h3 id="75b65a7c-0d85-4c1f-9092-c8fc378fb91e" class=""><details open=""><summary>1. 보안 그룹 설정 🔐</summary></details></h3><div class="indented"><p id="079ac464-3345-4d52-aa8e-81b565e167b3" class="">방화벽에서 서버의 port를 열어주는 작업</p><figure id="d25ef5a7-4358-4624-9b91-6fc5ab5fba47" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/screencapture-ap-northeast-2-console-aws-amazon-ec2-home-2023-03-03-14_32_28.png"><img style="width:1680px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/screencapture-ap-northeast-2-console-aws-amazon-ec2-home-2023-03-03-14_32_28.png"/></a></figure><figure id="38ea83aa-9373-4086-835f-ec93a8788777" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_2.45.27.png"><img style="width:3360px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_2.45.27.png"/></a></figure><p id="f7142bd5-0101-4e2c-9c44-3dff3502ab54" class="">
+</p></div><h3 id="ded3f491-141d-4792-86cc-27528e75ef91" class=""><details open=""><summary>2. 인스턴스 생성 👶</summary></details></h3><div class="indented"><figure id="fb7069a7-c394-4831-b217-3ecd4f29ad85" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/screencapture-ap-northeast-2-console-aws-amazon-ec2-home-2023-03-03-14_48_53.png"><img style="width:3360px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/screencapture-ap-northeast-2-console-aws-amazon-ec2-home-2023-03-03-14_48_53.png"/></a></figure><p id="3a71cb6d-9444-4e66-a28f-4900e76cda9a" class="">⇒ 생성된 인스턴스 오른쪽 마우스 → 연결 → 인스턴스에 연결</p><p id="8df1c075-c374-4174-b610-2b7b0275f781" class="">web browser(client) ↔ web server(server) : <strong>SSH</strong>라는 통신 방법으로 통신 (22번 포트로 소통)</p><figure id="8b95cd98-e87c-4c22-95bd-b8d6b04f4176" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_2.52.49.png"><img style="width:3360px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_2.52.49.png"/></a></figure><p id="d1d75abb-b41d-421f-9460-7fefd9da2fbc" class="">→ 보안 그룹 링크 클릭</p><ul id="1dfa3682-0ccf-4509-b387-d6b9fbb50b8d" class="bulleted-list"><li style="list-style-type:disc">인바운드 규칙<p id="d6d38a98-f080-4b6e-99b2-09da06ffcc4a" class="">SSH는 위험한 툴 - 22번 포트로 원격제어를 하기 때문 ⇒ 포트를 열때 특정 IP주소를 가진 접근만 허용하게 만듬</p><p id="216d91f4-502b-4691-a1e4-439715e203b8" class="">
+</p><p id="4bf92b35-5d23-4804-bd72-9ccd1607889e" class="">하지만 80번 포트에 특정 주소만 접근할 수 있게 하면 안됨 → 개발자 뿐만 아니라 웹을 접속하는 모든 사람이 볼 수 있어야 하기 때문에</p></li></ul><ul id="0bc1f4ea-b9fc-4b34-918f-12f3d01224b4" class="bulleted-list"><li style="list-style-type:disc">아웃바운드 규칙<p id="3c7e0a87-d541-4d65-b47e-d4d8f9145496" class="">지정하면 안됨 → 외부의 데이터를 가져올 수 없게 됨</p></li></ul></div><h3 id="11713136-7eec-4e86-bf8a-8cea750a4ab0" class=""><details open=""><summary>3. 인스턴스 연결 📶</summary></details></h3><div class="indented"><figure id="4af42190-5385-4f23-81c9-4b672aedabb8" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_3.00.20.png"><img style="width:3360px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_3.00.20.png"/></a></figure><p id="ffab7dca-c573-4bc9-a513-5fb03b6a601d" class="">→ 내 인스턴스 지정해서 연결 버튼 누르기</p></div><h3 id="4991fd13-b480-480c-a259-b781ca08919d" class=""><details open=""><summary>4. VS Code로 연결 🖥️</summary></details></h3><div class="indented"><ul id="e145aa46-d8c0-40c8-bbce-aa70d62fe485" class="bulleted-list"><li style="list-style-type:disc">IP 주소 / 도메인 주소 모두 접속 가능</li></ul><div id="bc3bf53d-1384-415d-993b-8ad273ef979a" class="column-list"><div id="190dcb2a-b531-47dc-9c01-bc6a35c5ceb3" style="width:50%" class="column"><figure id="8f77725d-89f5-462d-adc4-ae2d82dbfa24" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_3.14.57.png"><img style="width:446px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_3.14.57.png"/></a></figure></div><div id="83f29bfb-6c25-4f10-bc75-a5bbd8fd8935" style="width:50%" class="column"><figure id="362cf2ad-28dd-4e36-a75b-5173036b6ef3" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_3.15.06.png"><img style="width:564px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_3.15.06.png"/></a></figure></div></div><ul id="aefd7844-8d10-4af2-998a-0a9beac6cb65" class="bulleted-list"><li style="list-style-type:disc">keypair를 command pwd와 동일한 위치에 두기 (user16-3.pem)</li></ul><ul id="200de370-e85a-4d77-b41a-90fc52dad737" class="bulleted-list"><li style="list-style-type:disc">bash는 연결 안됨 → zsh<p id="0c62bef4-6508-4c77-996a-579dc4c2637d" class=""><code>ssh -i user16-3.pem ubuntu@</code><code><mark class="highlight-gray">[ip주소 / 도메인 주소]</mark></code></p><p id="a9dc655a-7f41-47a1-bdf0-1ba6b7df63c8" class=""><mark class="highlight-red">→ </mark><mark class="highlight-red"><strong>permission error : 다른 유저도 이 파일을 볼 수 있기 때문에 </strong></mark></p><p id="3a8b2017-db5c-4af8-92f2-ad55e0e0486b" class=""><mark class="highlight-blue"><code>sudo</code></mark><code> ssh -i user16-3.pem ubuntu@</code><code><mark class="highlight-gray">[ip주소 / 도메인 주소]</mark></code></p><p id="750bc4d8-136f-4f04-8df2-4107dfd415e5" class="">
+</p></li></ul></div><h3 id="df1fedc6-81a0-4b3c-aff7-cb27637c147b" class=""><details open=""><summary>5. CLI 환경에서 Apache 웹서버 설치 ⌨️</summary></details></h3><div class="indented"><p id="7cc1d68a-35c7-423e-8a2f-6af6b1a28204" class=""><code>sudo nano text.txt</code></p><ol type="1" id="884ef04a-d845-482f-827f-6a02c8fedaad" class="numbered-list" start="1"><li><code>sudo apt update</code>#apt는 앱스토어처럼 여러 프로그램을 관리</li></ol><ol type="1" id="17cf3865-a916-4670-a6e4-52af48e22ae7" class="numbered-list" start="2"><li><code>sudo apt install apache2</code></li></ol><ol type="1" id="293e50cc-73e7-436b-9524-a39b38664fd4" class="numbered-list" start="3"><li><code>curl </code><a href="http://localhost/"><code>http://localhost/</code></a> = <code>curl </code><code><a href="http://127.0.0.1">http://127.0.0.1</a></code> →웹 서버 잘 동작하는지 확인 (html 코드 출력)<p id="eecac14b-d9fb-4e48-8532-066cd40212f9" class="">127.0.0.1 = 내 컴퓨터를 가리키는 IP 주소</p></li></ol><ol type="1" id="31893b21-84a0-4cc6-a682-048968c2718a" class="numbered-list" start="4"><li>인스턴스 도메인 주소에 접속 → 안됨 : 80번 포트가 막혀 있어서 </li></ol><ol type="1" id="a6a2dc35-d86b-4cef-a4da-ca700c15ab42" class="numbered-list" start="5"><li>포트 개방<p id="7549734e-04d2-4d9c-a96c-a66ee3fa5f48" class="">인바운드 규칙 편집 → 규칙 추가 → HTTP (80번 포트) → Anywhere → 규칙 저장</p></li></ol><ol type="1" id="09738cf5-cc7f-4e05-a1ea-d637c360c165" class="numbered-list" start="6"><li>재접속 → 성공</li></ol></div><ul id="8d8afe3c-9daa-4e4f-8c30-c9797fcdbd4c" class="toggle"><li><details open=""><summary><strong>Option. 서버 성능 측정</strong></summary><figure id="f4820efd-57c9-4ac6-b79a-f130d8fa9eef"><a href="https://www.uptrends.com/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Website Monitoring and Web Performance Monitoring | Uptrends</div><div class="bookmark-description">Paid and Free Website Monitoring services, monitor website uptime, optimize performance and monitor multiple steps from 200+ locations.</div></div><div class="bookmark-href"><img src="https://www.uptrends.com/favicon-32x32.png" class="icon bookmark-icon"/>https://www.uptrends.com/</div></div></a></figure><p id="15f6fb52-fc4e-49fd-8291-1d56b8563c53" class="">→ 서버의 성능이 얼마인지 측정해주는 사이트</p></details></li></ul><h2 id="aba99df3-6fad-4976-adcf-3945b6f10171" class="block-color-blue_background">💭AWS CloudFront</h2><p id="e377ba48-b4d0-40a1-9296-0df46a9d6189" class="">: AWS에서 제공하는 CDN(<strong>콘텐츠 전송 네트워크</strong>) 서비스</p><h3 id="6d539b09-e18b-4472-aae5-fbd71eafc9a7" class=""><details open=""><summary>1. CloudFront 배포 🌎</summary></details></h3><div class="indented"><ul id="159b6a27-acec-45c4-a51e-953f39f061b4" class="bulleted-list"><li style="list-style-type:disc">캐시 정책 - CachingOptimized 설정</li></ul><figure id="6640dc6d-01e0-433c-953b-48fee7cdea00" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_4.26.22.png"><img style="width:1402px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_4.26.22.png"/></a></figure><p id="c1712d49-99c5-4a83-af96-185dd85c0da7" class="">→ 인스턴스 도메인 주소 입력</p><figure id="28f3eee5-39af-4a00-ab80-36efd764689a" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_4.25.40.png"><img style="width:1138px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_4.25.40.png"/></a></figure><h3 id="43290978-ed81-4a47-986f-fad750a501dc" class=""><details open=""><summary><mark class="highlight-gray">1-1) 엣지 로케이션</mark></summary></details></h3><div class="indented"><figure id="dda981e9-bb85-4109-98de-f5208f4429ab" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/Untitled.png"><img style="width:946px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/Untitled.png"/></a></figure><p id="05a79f71-de82-40de-a95d-cba136700d46" class="">오렌지 원 : region</p><p id="ee3ac03c-81d0-4b60-9404-9dd991d17d9b" class="">점 : cloudfront의 서버가 있는 위치 = <strong>proxy server (대리 서버)</strong></p></div></div><h3 id="b070754c-32da-4ec8-838e-9669317957af" class=""><details open=""><summary>2. 배포 도메인으로 접속 📶</summary></details></h3><div class="indented"><figure id="2179470b-e9f8-43b5-b796-bce0af29bff4" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_4.31.13.png"><img style="width:1476px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_4.31.13.png"/></a></figure></div><h2 id="4e965c16-73c4-4a2c-80a7-44b19de88d4e" class="block-color-blue_background">💭AWS RDS</h2><h3 id="5689e716-170b-4928-959c-f5f82cdb720f" class=""><details open=""><summary>1. 데이터베이스 생성 👶</summary></details></h3><div class="indented"><div id="ac60f140-494f-4bb2-92ea-c7980f808dac" class="column-list"><div id="f097e70b-b673-48cd-b53d-ae10a9060cd1" style="width:50%" class="column"><figure id="0e16ba3f-47e8-407e-9e54-e52a2591e44a"><a href="https://db-engines.com/en/ranking" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">DB-Engines Ranking</div><div class="bookmark-description">Popularity ranking of database management systems.</div></div><div class="bookmark-href"><img src="https://db-engines.com/favicon.ico" class="icon bookmark-icon"/>https://db-engines.com/en/ranking</div></div><img src="https://db-engines.com/pictures/db-engines_128x128.png" class="bookmark-image"/></a></figure></div><div id="b2180a4b-9f20-4440-bba9-a52ef17cf94b" style="width:50%" class="column"><figure id="4b2b40cd-ff90-4cd2-b4ff-b41d2fdf3fcc" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_4.38.11.png"><img style="width:818px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_4.38.11.png"/></a></figure></div></div><figure id="5f82f7d0-2213-47db-9bb4-03d28d407bac" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_4.45.18.png"><img style="width:1486px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_4.45.18.png"/></a></figure><figure id="5adb9adb-337c-4233-910e-d3807f90cb07" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_4.47.12.png"><img style="width:1404px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_4.47.12.png"/></a></figure><p id="d2ed36e1-ac9a-4d80-8779-be0db2b64996" class="">→ database에는 여러 유저들이 존재하기 때문에 master 유저를 지정해줘야함</p><figure id="dcf1df7f-2460-4a40-bd91-ead55292b3be" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_4.48.10.png"><img style="width:1290px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_4.48.10.png"/></a></figure></div><h3 id="3f285efa-664d-4860-8955-ac256d6403eb" class=""><details open=""><summary>2. MySQL Client ↔ Server</summary></details></h3><div class="indented"><ul id="34730131-3753-4067-8db9-e5d8c66dec89" class="bulleted-list"><li style="list-style-type:disc">MySQL client를 EC2 인스턴스에 다운<p id="4984d486-6d9b-49e8-88b5-1587bf101814" class=""><code>sudo apt install mysql-client</code># mysql 모니터 설치</p></li></ul><ul id="6ad287fa-a078-4ed9-b3a6-e0ddd907b75e" class="bulleted-list"><li style="list-style-type:disc">EC2 인스턴스 → RDS의 MySQL서버에 접속<p id="9c715d1c-3c42-4c85-8e08-7d7ac9cac1d6" class=""><code>mysql -uadmin -pqwertyuiop[] -h[데이터베이스 엔드포인트 주소]</code># option 띄어쓰기 하면 오류남</p></li></ul></div><h3 id="c3ff34cc-7afe-47a1-b334-a4310065e895" class=""><details open=""><summary>3. 데이터 채우기 💽</summary></details></h3><div class="indented"><p id="db004087-8b7a-4fb3-bed1-569a8df2b6ad" class=""><code>CREATE DATABASE mydb;</code></p><p id="4fea5206-d48d-4b71-b47d-199554a1715b" class=""><code>use mydb;</code></p><p id="7a9beda8-1136-4b04-a3d1-050ea4a58ba2" class=""><code>CREATE TABLE topic(id int NOT NULL AUTO_INCREMENT PRIMARY KEY, title char(20) NOT NULL, description TINYTEXT, thumbnail varchar(200) NULL);</code></p><p id="e551f764-82df-423d-b1d4-9afe185f74e4" class=""><code>desc topic;</code></p><figure id="169f4e8e-9508-4505-9456-ccebedec41a8" class="image"><a href="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_5.26.30.png"><img style="width:1276px" src="2023%2003%2003%20AWS%20%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A9%E1%84%8B%E1%85%B5%E1%86%BC%20%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%208b3a877529ad47fdb36b7b5de2c2ece6/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2023-03-03_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_5.26.30.png"/></a></figure><p id="03605b28-1bfc-4a39-8ec1-588944b5cd75" class=""><code>INSERT INTO topic;</code></p><p id="27883c7f-eb74-4214-889a-a6d8e31ded28" class=""><code>INSERT INTO topic (title, description) VALUES(&#x27;ec2&#x27;,&#x27;ec2 is ...&#x27;);</code></p><p id="d223b108-5a6b-4431-864f-b09b33be296c" class="">…</p><p id="87514923-f401-4dea-b34d-01766c669700" class=""><code>exit</code></p><p id="3569fde0-d004-4d0b-951c-2de6cc62d517" class="">
+</p></div><h3 id="448c8781-88f4-4271-b8b2-34d67fefebac" class=""><details open=""><summary>4. PHP 맛보기 😋</summary></details></h3><div class="indented"><p id="01ac603c-4af7-4b1d-baae-8834087ac6b2" class="">: 동적 웹사이트 호스팅 (html : 정적 웹사이트 호스팅)</p><p id="c9ee582c-a23f-43cf-8cc0-e9e4d72477dc" class=""><code>sudo apt install php</code></p><p id="fa1bae64-4945-40d4-9732-7caee13e9061" class=""><code>php -v</code> # v8.1.2</p><p id="b87bcb7e-caaf-428c-be5a-fc3d2bc10a84" class=""><code>cd /var/www/html</code> # EC2의 웹페이지(index.html)가 있는 위치</p><p id="465ee1a3-aaab-404a-bee9-047aef172c4e" class=""><code>sudo rm index.html</code> # index.html 삭제 → reload하면 웹페이지 접속이 안됨</p><p id="67d552a1-0d90-48a3-ac00-ddf8287f3118" class=""><code>sudo nano hello.php</code><div class="indented"><p id="bb501216-a35d-485e-9d4c-c05eb0ae8eb0" class="">&lt;strong&gt;hello PHP!&lt;/strong&gt;</p><p id="259bce81-7fd0-4df4-9340-4c39ab7bcd74" class=""><mark class="highlight-gray"><code>control + o</code></mark></p><p id="7a2e84bd-8bf7-4705-9f67-84d903832217" class=""><mark class="highlight-gray"><code>enter</code></mark></p><p id="efff231f-cf94-4c1c-991c-63260e1f94a7" class=""><mark class="highlight-gray"><code>control + x</code></mark></p></div></p><p id="05599f62-fbc9-43e6-bd13-021460b504ae" class=""><code>&lt;strong&gt;hello PHP!&lt;/strong&gt;</code><mark class="highlight-blue"><code>&lt;?php print(rand()); ?&gt;</code></mark># 랜덤한 숫자 출력</p><p id="19990f62-8dc8-4f77-a715-2119427aabfb" class="">→ EC2 인스턴스 reload 할때마다 랜덤으로 출력됨</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4b159041-3df6-4548-8ad5-0531e60f083e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">미들웨어 : 서로 다른 애플리케이션이 서로 통신하는데 사용되는 소프트웨어</div></figure></div><h3 id="3da9c3c1-be0c-464d-8e51-a0b94fd72898" class=""><details open=""><summary>5. PHP로 데이터베이스에서 데이터 가져오기</summary></details></h3><div class="indented"><p id="182f5c2d-76e2-42cd-bae3-9c538ed91cf2" class=""><code>sudo apt install php-mysql;</code> # php↔mysql 연동</p><p id="e6cf1bb6-99a8-4b58-a5d4-d50da77abff4" class=""><code>sudo cp /usr/lib/php/</code><code><strong>8.1</strong></code><code>/php.ini-development /etc/php/</code><code><strong>8.1</strong></code><code>/apache2/php.ini;</code> # 개발용 php</p><p id="7806d515-9564-4f9d-98a7-558352821caa" class=""><code>sudo service apache2 restart</code></p><p id="fa9244dc-04af-4039-ab73-e8701fe3d86f" class=""><code>cd /var/www/html</code></p><p id="759917d5-4862-4e46-b7d3-6e192d1ef898" class=""><code>sudo wget </code><code><a href="https://raw.githubusercontent.com/egoingsb/offline/master/AWS/php-mysql.php">https://raw.githubusercontent.com/egoingsb/offline/master/AWS/php-mysql.php</a></code><code> -O index.php</code> # index.php 다운로드</p><p id="5ccaa20b-a613-4e56-b1e8-c29d6fb00a81" class="">
+</p></div><p id="157fc8af-9033-40bd-bc0d-28595c1df1a7" class="">
+</p></div></article></body></html>
